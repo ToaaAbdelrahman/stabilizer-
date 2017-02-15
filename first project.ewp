@@ -1961,6 +1961,9 @@
       <name>$PROJ_DIR$\main.c</name>
     </file>
     <file>
+      <name>G:\interface with stm\pitch_stabilize.h</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\stm32f4xx_it.c</name>
     </file>
     <file>
