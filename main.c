@@ -2,7 +2,7 @@
 #include "stm32f4_discovery.h"
 #include <stm32f4xx_i2c.h>
 //#include "pitch_stabilize.h>
-//#include <stdio.h>
+#include <stdio.h>
 
 #define SLAVE_ADDRESS 0x3D 
 void Delay(__IO uint32_t time);
@@ -223,22 +223,32 @@ void I2C_stop(I2C_TypeDef* I2Cx){
 int initial_pitch_flag = 0; 
 uint8_t pitch_first_1;
 uint8_t pitch_first_2;
-short initial_pitch(void)
+short concatenate(uint8_t x, uint8_t y) {
+    uint8_t pow = 10;
+    while(y >= pow)
+        pow *= 10;
+    return x * pow + y;        
+}
+short initial_pitch()
 {
   
   initial_pitch_flag = 1;
-  I2C_init();
-  I2C_start(I2C1, SLAVE_ADDRESS<<1, I2C_Direction_Receiver);
-  uint8_t temp;
-  for( int i=0;i<18;i++)
+ // I2C_init();
+  //I2C_start(I2C1, SLAVE_ADDRESS<<1, I2C_Direction_Receiver);
+ // uint8_t temp;
+  /*for( int i=0;i<18;i++)
   {
    temp = I2C_read_ack(I2C1);
   
-  }
-      pitch_first_1= I2C_read_ack(I2C1);
-      pitch_first_2= I2C_read_ack(I2C1);
-          I2C_stop(I2C1);
-short concatenated = pitch_first_1 | pitch_first_2;
+  }*/
+   //  pitch_first_1= I2C_read_ack(I2C1);
+   //  pitch_first_2= I2C_read_ack(I2C1);
+  pitch_first_1 = 11;
+  pitch_first_2 = 20;
+       //   I2C_stop(I2C1);
+  
+short concatenated = concatenate (pitch_first_1 ,pitch_first_2);
+  printf(" %d\n", concatenated);
   return concatenated  ;
   
 
@@ -246,21 +256,24 @@ short concatenated = pitch_first_1 | pitch_first_2;
 short not_initial_pitch()
 {
 
-//short ipitch = pitch_first_1 | pitch_first_2;
+short ipitch =concatenate ( pitch_first_1 , pitch_first_2);
 uint8_t pitch_1_stabilized  = pitch_first_1;
 uint8_t pitch_2_stabilized = pitch_first_2;
 uint8_t temp;
-  for( int i=0;i<18;i++)
+ /* for( int i=0;i<18;i++)
   {
    temp = I2C_read_ack(I2C1);
   
-  }
+  }*/
   
-uint8_t pitch_1_UNstabilized  = I2C_read_ack(I2C1);
-uint8_t pitch_2_UNstabilized  = I2C_read_ack(I2C1);
-          I2C_stop(I2C1);
+//uint8_t pitch_1_UNstabilized  = I2C_read_ack(I2C1);
+//uint8_t pitch_2_UNstabilized  = I2C_read_ack(I2C1);
+        //  I2C_stop(I2C1);
+uint8_t pitch_1_UNstabilized = 11;
+uint8_t pitch_2_UNstabilized  =20;
 
-// first part 
+
+/*// first part 
 if (pitch_1_UNstabilized>pitch_1_stabilized)
 pitch_1_stabilized = pitch_1_UNstabilized - (pitch_1_UNstabilized - pitch_1_stabilized);
 else if (pitch_1_UNstabilized<pitch_1_stabilized)
@@ -279,12 +292,32 @@ pitch_2_stabilized= pitch_2_UNstabilized +(pitch_2_stabilized-pitch_2_UNstabiliz
 }
 else if (pitch_2_UNstabilized==pitch_2_stabilized) ;
 
+*/
 
 
 
 
 
-short concatenated =pitch_1_stabilized|pitch_2_stabilized;
+short concatenated =concatenate (pitch_1_UNstabilized,pitch_2_UNstabilized);
+  printf("wrong is  %d\n", concatenated);
+  printf("right is  %d\n", ipitch);
+
+if (concatenated>ipitch)
+{
+
+  concatenated = concatenated - (concatenated - ipitch);
+      printf("corrected  is  %d\n", concatenated);
+
+}
+else if (concatenated<ipitch)
+{
+concatenated= concatenated +(ipitch-concatenated);
+      printf("corrected  is  %d\n", concatenated);
+
+}
+else if (concatenated==ipitch) ;
+  printf(" %d\n", concatenated);
+
 return concatenated ; 
 }
 
@@ -304,22 +337,27 @@ else return not_initial_pitch();
 int initial_yaw_flag = 0; 
 uint8_t yaw_first_1;
 uint8_t yaw_first_2;
-short initial_yaw(void)
+
+short initial_yaw()
 {
   
   initial_yaw_flag = 1;
-  I2C_init();
-  I2C_start(I2C1, SLAVE_ADDRESS<<1, I2C_Direction_Receiver);
-  uint8_t temp;
-  for( int i=0;i<22;i++)
+ // I2C_init();
+  //I2C_start(I2C1, SLAVE_ADDRESS<<1, I2C_Direction_Receiver);
+ // uint8_t temp;
+  /*for( int i=0;i<18;i++)
   {
    temp = I2C_read_ack(I2C1);
   
-  }
-      yaw_first_1= I2C_read_ack(I2C1);
-      yaw_first_2= I2C_read_ack(I2C1);
-          I2C_stop(I2C1);
-short concatenated = yaw_first_1 | yaw_first_2;
+  }*/
+   //  yaw_first_1= I2C_read_ack(I2C1);
+   //  yaw_first_2= I2C_read_ack(I2C1);
+  yaw_first_1 = 11;
+  yaw_first_2 = 20;
+       //   I2C_stop(I2C1);
+  
+short concatenated = concatenate (yaw_first_1 ,yaw_first_2);
+  printf(" %d\n", concatenated);
   return concatenated  ;
   
 
@@ -327,45 +365,68 @@ short concatenated = yaw_first_1 | yaw_first_2;
 short not_initial_yaw()
 {
 
-//short ipitch = pitch_first_1 | pitch_first_2;
+short iyaw =concatenate ( yaw_first_1 , yaw_first_2);
 uint8_t yaw_1_stabilized  = yaw_first_1;
 uint8_t yaw_2_stabilized = yaw_first_2;
 uint8_t temp;
-  for( int i=0;i<22;i++)
+ /* for( int i=0;i<18;i++)
   {
    temp = I2C_read_ack(I2C1);
   
-  }
+  }*/
   
-uint8_t yaw_1_UNstabilized  = I2C_read_ack(I2C1);
-uint8_t yaw_2_UNstabilized  = I2C_read_ack(I2C1);
-          I2C_stop(I2C1);
+//uint8_t yaw_1_UNstabilized  = I2C_read_ack(I2C1);
+//uint8_t yaw_2_UNstabilized  = I2C_read_ack(I2C1);
+        //  I2C_stop(I2C1);
+uint8_t yaw_1_UNstabilized = 13;
+uint8_t yaw_2_UNstabilized  =20;
 
-// first part 
-if (yaw_1_UNstabilized>yaw_1_stabilized)
-yaw_1_stabilized = yaw_1_UNstabilized - (yaw_1_UNstabilized - yaw_1_stabilized);
-else if (yaw_1_UNstabilized<yaw_1_stabilized)
+
+/*// first part 
+if (pitch_1_UNstabilized>pitch_1_stabilized)
+pitch_1_stabilized = pitch_1_UNstabilized - (pitch_1_UNstabilized - pitch_1_stabilized);
+else if (pitch_1_UNstabilized<pitch_1_stabilized)
 {
-yaw_1_stabilized= yaw_1_UNstabilized +(yaw_1_stabilized-yaw_1_UNstabilized);
+pitch_1_stabilized= pitch_1_UNstabilized +(pitch_1_stabilized-pitch_1_UNstabilized);
 }
-else if (yaw_1_UNstabilized==yaw_1_stabilized) ;
+else if (pitch_1_UNstabilized==pitch_1_stabilized) ;
 
 // second 
 
-if (yaw_2_UNstabilized>yaw_2_stabilized)
-yaw_2_stabilized = yaw_2_UNstabilized - (yaw_2_UNstabilized - yaw_2_stabilized);
-else if (yaw_2_UNstabilized<yaw_2_stabilized)
+if (pitch_2_UNstabilized>pitch_2_stabilized)
+pitch_2_stabilized = pitch_2_UNstabilized - (pitch_2_UNstabilized - pitch_2_stabilized);
+else if (pitch_2_UNstabilized<pitch_2_stabilized)
 {
-yaw_2_stabilized= yaw_2_UNstabilized +(yaw_2_stabilized-yaw_2_UNstabilized);
+yaw_2_stabilized= yaw_2_UNstabilized +(yaw_2_stabilized-pitch_2_UNstabilized);
 }
 else if (yaw_2_UNstabilized==yaw_2_stabilized) ;
 
+*/
 
 
 
 
 
-short concatenated =yaw_1_stabilized|yaw_2_stabilized;
+short concatenated =concatenate (yaw_1_UNstabilized,yaw_2_UNstabilized);
+  printf("wrong is  %d\n", concatenated);
+  printf("right is  %d\n", iyaw);
+
+if (concatenated>iyaw)
+{
+
+  concatenated = concatenated - (concatenated - iyaw);
+      printf("corrected  is  %d\n", concatenated);
+
+}
+else if (concatenated<iyaw)
+{
+concatenated= concatenated +(iyaw-concatenated);
+      printf("corrected  is  %d\n", concatenated);
+
+}
+else if (concatenated==iyaw) ;
+  printf(" %d\n", concatenated);
+
 return concatenated ; 
 }
 
@@ -380,110 +441,17 @@ else return not_initial_yaw();
 
 
 }
+
 //////////////////////////////////////////////////////////
 
 
 
 int main(void){
-//short test = stabilize_pitch();	
-    // printf("r:");
+
+short test = stabilize_yaw();
+ short test2 = stabilize_yaw(); 
+
   
-  
-  
-	I2C_init(); // initialize I2C1 & I2C2  & I2C3 peripheral
-        
-        
-        /*Description
-         *receive 8 bits data from imu by using I2C1*/
-        //el mafrod aktb el slave addres bta3 el imu ely hst2bl meno sata 
-        //#define SLAVE_ADDRESS 0x4A // the slave address (example) hykon 7aga shbh dah
-        I2C_start(I2C1, SLAVE_ADDRESS<<1, I2C_Direction_Receiver); // start a transmission in Master receiver mode
-        
-        /*accelerometer read*/
-        uint8_t accelx_first_1= I2C_read_ack(I2C1);
-        uint8_t accelx_first_2= I2C_read_ack(I2C1);
-        uint8_t accely_second_1= I2C_read_ack(I2C1);
-        uint8_t accely_second_2= I2C_read_ack(I2C1);
-        uint8_t accel_third_1= I2C_read_ack(I2C1);
-        uint8_t accel_third_2= I2C_read_ack(I2C1);
-        /*gyroscope read*/
-         uint8_t gyrox_first_1= I2C_read_ack(I2C1);
-         uint8_t gyrox_first_2= I2C_read_ack(I2C1);
-         uint8_t gyroy_second_1= I2C_read_ack(I2C1);
-         uint8_t gyroy_second_2= I2C_read_ack(I2C1);
-         uint8_t gyro_third_1= I2C_read_ack(I2C1);
-         uint8_t gyro_third_2= I2C_read_ack(I2C1);
-        /*magnometer read*/
-          uint8_t magx_first_1= I2C_read_ack(I2C1);
-         uint8_t magx_first_2= I2C_read_ack(I2C1);
-         uint8_t magy_second_1= I2C_read_ack(I2C1);
-         uint8_t magy_second_2= I2C_read_ack(I2C1);
-         uint8_t mag_third_1= I2C_read_ack(I2C1);
-         uint8_t mag_third_2= I2C_read_ack(I2C1);
-         /*Euler angle*/
-         uint8_t pitch_first_1= I2C_read_ack(I2C1);
-         uint8_t pitch_first_2= I2C_read_ack(I2C1);
-         uint8_t roll_second_1= I2C_read_ack(I2C1);
-         uint8_t roll_second_2= I2C_read_ack(I2C1);
-         uint8_t yaw_third_1= I2C_read_ack(I2C1);
-         uint8_t yaw_third_2= I2C_read_ack(I2C1);
-         
-          /*quaternion used for more accuracy*/
-         uint8_t Qw_first_1= I2C_read_ack(I2C1);
-         uint8_t Qw_first_2= I2C_read_ack(I2C1);
-         uint8_t Qx_second_1= I2C_read_ack(I2C1);
-         uint8_t Qx_second_2= I2C_read_ack(I2C1);
-         uint8_t Qy_third_1= I2C_read_ack(I2C1);
-         uint8_t Qy_third_2= I2C_read_ack(I2C1);
-         uint8_t Q_fourth_1= I2C_read_ack(I2C1);
-         uint8_t Q_fourth_2= I2C_read_ack(I2C1);
-       /*stop bit*/
-       I2C_stop(I2C1);
-         
-       
-       
-        /*
-         *Description
-         *after processing this data in the control algorithm it will be send to motors & logger*/
-       
-	/*
-         *Description
-         *send 8 bits data from stm to motors using I2C3*/
-        //el mafrod aktb el slave addres bta3 el motors ely hb3tlo data
-        #define SLAVE_ADDRESS 0x4A // the slave address (example) hykon 7aga shbh dah
-         I2C_start(I2C3, SLAVE_ADDRESS<<1, I2C_Direction_Transmitter); // start a transmission in Master transmitter mode
-         
-          /*pitch*/
-        I2C_write(I2C3, pitch_first_1);
-        I2C_write(I2C3, pitch_first_2);
-        /*roll*/ 
-        I2C_write(I2C3, roll_second_1);
-        I2C_write(I2C3, roll_second_2);
-        /*yaw*/
-        I2C_write(I2C3,yaw_third_1);
-        I2C_write(I2C3, yaw_third_2);
-	/*stop bit*/
-        I2C_stop(I2C2);
-         
-         
-         /*
-         *Description
-         *send 8 bits data from stm to logger using I2C2*/
-        //el mafrod aktb el slave addres bta3 el logger ely hb3tlo data
-        //#define SLAVE_ADDRESS 0x4A // the slave address (example) hykon 7aga shbh dah
-         I2C_start(I2C2, SLAVE_ADDRESS<<1, I2C_Direction_Transmitter); // start a transmission in Master transmitter mode
-        
-        /*pitch*/
-        I2C_write(I2C2, pitch_first_1);
-        I2C_write(I2C2, pitch_first_2);
-        /*roll*/ 
-        I2C_write(I2C2, roll_second_1);
-        I2C_write(I2C2, roll_second_2);
-        /*yaw*/
-        I2C_write(I2C2,yaw_third_1);
-        I2C_write(I2C2, yaw_third_2);
-	/*stop bit*/
-        I2C_stop(I2C2);
         
 	return 0;
 }
