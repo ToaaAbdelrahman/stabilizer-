@@ -2343,6 +2343,9 @@
     <file>
       <name>E:\STM\STM32F4-Discovery_FW_V1.1.0\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.c</name>
     </file>
+    <file>
+      <name>E:\STM\STM32F4-Discovery_FW_V1.1.0\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.c</name>
+    </file>
   </group>
   <group>
     <name>User</name>
@@ -2357,6 +2360,15 @@
     </file>
     <file>
       <name>$PROJ_DIR$\system_stm32f4xx.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\tm_stm32f4_gpio.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\tm_stm32f4_onewire.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\tm_stm32f4_timer_properties.c</name>
     </file>
   </group>
 </project>

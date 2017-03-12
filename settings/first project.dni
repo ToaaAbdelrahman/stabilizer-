@@ -9,12 +9,12 @@ TriggerName=main
 LimitSize=0
 ByteLimit=50
 [StLinkDriver]
-stlinkserialNo=30303031
+stlinkserialNo=24510187
 stlinkfoundProbes=
 CStepIntDis=_ 0
-LeaveTargetRunning=_ 0
+LeaveTargetRunning=_ 1
 [DebugChecksum]
-Checksum=-1070054161
+Checksum=1948807249
 [Exceptions]
 StopOnUncaught=_ 0
 StopOnThrow=_ 0
@@ -55,6 +55,9 @@ ShowSource=1
 [Simulator]
 Freq=10000000
 MultiCoreRunAll=1
+[SfrWindow]
+Show=1 1
+Sort=4 0
 [Trace2]
 Enabled=0
 ShowSource=0
@@ -95,10 +98,6 @@ ShowTimeLog=1
 SumEnabled=0
 ShowTimeSum=1
 SumSortOrder=0
-[Disassemble mode]
-mode=0
-[Breakpoints2]
-Count=0
 [Log file]
 LoggingEnabled=_ 0
 LogFile=_ ""
@@ -106,9 +105,6 @@ Category=_ 0
 [TermIOLog]
 LoggingEnabled=_ 0
 LogFile=_ ""
-[Aliases]
-Count=0
-SuppressDialog=0
 [DriverProfiling]
 Enabled=0
 Mode=3
@@ -119,3 +115,10 @@ Exclusions=
 Enabled=0
 [CallStackStripe]
 ShowTiming=1
+[Disassemble mode]
+mode=0
+[Breakpoints2]
+Count=0
+[Aliases]
+Count=0
+SuppressDialog=0
