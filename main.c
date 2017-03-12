@@ -1245,13 +1245,88 @@ float to_motor_angles (float imu_angle)
   return    (31.0/6)*imu_angle+1470;
 }
 
+void initializeMotor()
+{
+unsigned y=0;
+//Define struct
+GPIO_InitTypeDef GPIO_InitDef;
+TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStructure;
+TIM_OCInitTypeDef  TIM_OCInitStructure;
+
+/*------------------------------------------------------------------------------------*/
+	  //Enable clk of Port D
+  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
+
+GPIO_InitDef.GPIO_Pin = GPIO_Pin_13 | GPIO_Pin_12;
+GPIO_InitDef.GPIO_Mode = GPIO_Mode_OUT;
+GPIO_InitDef.GPIO_OType = GPIO_OType_PP;
+GPIO_InitDef.GPIO_PuPd = GPIO_PuPd_UP;
+GPIO_InitDef.GPIO_Speed = GPIO_Speed_50MHz;
+//Initialize pins 12 and 13 "orange and green LEDs"
+  GPIO_Init(GPIOD, &GPIO_InitDef);
+//set LD4
+  GPIO_SetBits(GPIOD,GPIO_Pin_12);
+/*------------------------------------------------------------------------------------*/
+  //Enable Clk of Port A
+  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
+
+    GPIO_InitDef.GPIO_Pin = GPIO_Pin_6 | GPIO_Pin_7;
+    GPIO_InitDef.GPIO_Mode = GPIO_Mode_AF;
+    GPIO_InitDef.GPIO_OType = GPIO_OType_PP;
+    GPIO_InitDef.GPIO_PuPd = GPIO_PuPd_UP;
+    GPIO_InitDef.GPIO_Speed = GPIO_Speed_50MHz;
+    //Initialize pins 6 and 7 as alternate
+      GPIO_Init(GPIOA, &GPIO_InitDef);
+    // connect pins 6,7 with TIM3
+      GPIO_PinAFConfig(GPIOA,GPIO_PinSource6, GPIO_AF_TIM3);
+      GPIO_PinAFConfig(GPIOA,GPIO_PinSource7, GPIO_AF_TIM3);
+
+/*------------------------------------------------------------------------------------------------------------*/
+      //Enable Clk of TIM3
+           RCC_APB1PeriphClockCmd( RCC_APB1Periph_TIM3,ENABLE);
+
+      // Initate Timer
+           TIM_TimeBaseInitStructure.TIM_ClockDivision=1;
+           TIM_TimeBaseInitStructure.TIM_Period=1999;
+           TIM_TimeBaseInitStructure.TIM_Prescaler=42;
+           TIM_TimeBaseInitStructure.TIM_RepetitionCounter=TIM_CounterMode_Up;
+           TIM_TimeBaseInit(TIM3, & TIM_TimeBaseInitStructure);
+
+      //   PWM
+           TIM_OCInitStructure.TIM_OCMode=TIM_OCMode_PWM1;
+           TIM_OCInitStructure.TIM_OutputState=TIM_OutputState_Enable;
+           TIM_OCInitStructure.TIM_OCPolarity=TIM_OCPolarity_High;
+		   TIM_OCInitStructure.TIM_Pulse=0;
+	 // channel 1
+		   TIM_OC1Init(TIM3,&TIM_OCInitStructure);
+		   TIM_OC1PreloadConfig(TIM3, TIM_OCPreload_Enable);
+	 // channel 2
+		   TIM_OC2Init(TIM3,&TIM_OCInitStructure);
+		   TIM_OC1PreloadConfig(TIM3, TIM_OCPreload_Enable);
+
+
+
+}
+void rotateMotor(float VCM)
+{
+
+
+
+
+ TIM3->CCR1=VCM;
+
+
+
+}
+
+
 int main(void){
 
 printf("hello");
 
   
       float to_motor_pitch,to_motor_yaw;  
-	
+	initializeMotor();
         
     while (1)
     {
@@ -1261,6 +1336,7 @@ printf("hello");
     to_motor_pitch=to_motor_angles(pitch);
     stabilize_yaw();
     to_motor_yaw=to_motor_angles(yaw);
+    
     
     
     }
