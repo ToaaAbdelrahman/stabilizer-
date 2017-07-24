@@ -12,6 +12,10 @@ E:\STM\STM32F4-Discovery_FW_V1.1.0\Libraries\STM32F4xx_StdPeriph_Driver\inc
 -I
 E:\STM\STM32F4-Discovery_FW_V1.1.0\Utilities\STM32F4-Discovery
 -I
+E:\PID STM\00-STM32F4xx_STANDARD_PERIPHERAL_DRIVERS\CMSIS\Include
+-I
+C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\arm\CMSIS\Include
+-I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\arm\inc
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\arm\inc\c
@@ -25,6 +29,10 @@ C:\Users\Dell\Desktop\control algo
 E:\STM\STM32F4-Discovery_FW_V1.1.0\Libraries\STM32F4xx_StdPeriph_Driver\inc
 -I
 E:\STM\STM32F4-Discovery_FW_V1.1.0\Utilities\STM32F4-Discovery
+-I
+E:\PID STM\00-STM32F4xx_STANDARD_PERIPHERAL_DRIVERS\CMSIS\Include
+-I
+C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\arm\CMSIS\Include
 -DUSE_STDPERIPH_DRIVER=1
 -DSTM32F4XX=1
 -D__CHAR_BITS__=8

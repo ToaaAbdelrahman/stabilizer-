@@ -9,12 +9,12 @@ TriggerName=main
 LimitSize=0
 ByteLimit=50
 [StLinkDriver]
-stlinkserialNo=24510187
+stlinkserialNo=30303031
 stlinkfoundProbes=
 CStepIntDis=_ 0
 LeaveTargetRunning=_ 1
 [DebugChecksum]
-Checksum=1948807249
+Checksum=-2094967870
 [Exceptions]
 StopOnUncaught=_ 0
 StopOnThrow=_ 0
@@ -41,6 +41,9 @@ ITMportsEnable=0
 ITMportsTermIO=0
 ITMportsLogFile=0
 ITMlogFile=$PROJ_DIR$\ITM.log
+[SfrWindow]
+Show=1 1
+Sort=4 0
 [Interrupts]
 Enabled=1
 [MemConfig]
@@ -55,9 +58,6 @@ ShowSource=1
 [Simulator]
 Freq=10000000
 MultiCoreRunAll=1
-[SfrWindow]
-Show=1 1
-Sort=4 0
 [Trace2]
 Enabled=0
 ShowSource=0

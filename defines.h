@@ -28,6 +28,7 @@
 #ifndef TM_DEFINES_H
 #define TM_DEFINES_H
 
+#define TM_DISCO_STM32F4_DISCOVERY
 /* Put your global defines for all libraries here used in your project */
 
 #endif

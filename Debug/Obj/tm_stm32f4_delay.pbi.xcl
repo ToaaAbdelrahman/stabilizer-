@@ -1,4 +1,4 @@
-"C:\Users\Dell\Desktop\iarfirstproject\tm_stm32f4_delay.c"
+"C:\Users\Dell\Desktop\control algo\tm_stm32f4_delay.c"
 -std=c99
 -ferror-limit=100
 -I
@@ -6,11 +6,15 @@ E:\STM\STM32F4-Discovery_FW_V1.1.0\Libraries\CMSIS\Include
 -I
 E:\STM\STM32F4-Discovery_FW_V1.1.0\Libraries\CMSIS\ST\STM32F4xx\Include
 -I
-C:\Users\Dell\Desktop\iarfirstproject
+C:\Users\Dell\Desktop\control algo
 -I
 E:\STM\STM32F4-Discovery_FW_V1.1.0\Libraries\STM32F4xx_StdPeriph_Driver\inc
 -I
 E:\STM\STM32F4-Discovery_FW_V1.1.0\Utilities\STM32F4-Discovery
+-I
+E:\PID STM\00-STM32F4xx_STANDARD_PERIPHERAL_DRIVERS\CMSIS\Include
+-I
+C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\arm\CMSIS\Include
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\arm\inc
 -I
@@ -20,11 +24,15 @@ E:\STM\STM32F4-Discovery_FW_V1.1.0\Libraries\CMSIS\Include
 -I
 E:\STM\STM32F4-Discovery_FW_V1.1.0\Libraries\CMSIS\ST\STM32F4xx\Include
 -I
-C:\Users\Dell\Desktop\iarfirstproject
+C:\Users\Dell\Desktop\control algo
 -I
 E:\STM\STM32F4-Discovery_FW_V1.1.0\Libraries\STM32F4xx_StdPeriph_Driver\inc
 -I
 E:\STM\STM32F4-Discovery_FW_V1.1.0\Utilities\STM32F4-Discovery
+-I
+E:\PID STM\00-STM32F4xx_STANDARD_PERIPHERAL_DRIVERS\CMSIS\Include
+-I
+C:\Program Files (x86)\IAR Systems\Embedded Workbench 7.5\arm\CMSIS\Include
 -DUSE_STDPERIPH_DRIVER=1
 -DSTM32F4XX=1
 -D__CHAR_BITS__=8

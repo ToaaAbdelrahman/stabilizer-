@@ -132,7 +132,7 @@
         </option>
         <option>
           <name>OGUseCmsis</name>
-          <state>0</state>
+          <state>1</state>
         </option>
         <option>
           <name>OGUseCmsisDspLib</name>
@@ -320,6 +320,7 @@
           <state>$PROJ_DIR$</state>
           <state>E:\STM\STM32F4-Discovery_FW_V1.1.0\Libraries\STM32F4xx_StdPeriph_Driver\inc</state>
           <state>E:\STM\STM32F4-Discovery_FW_V1.1.0\Utilities\STM32F4-Discovery</state>
+          <state>E:\PID STM\00-STM32F4xx_STANDARD_PERIPHERAL_DRIVERS\CMSIS\Include</state>
         </option>
         <option>
           <name>CCStdIncCheck</name>
@@ -1930,6 +1931,9 @@
     <file>
       <name>E:\STM\STM32F4-Discovery_FW_V1.1.0\Libraries\CMSIS\ST\STM32F4xx\Source\Templates\iar\startup_stm32f4xx.s</name>
     </file>
+    <file>
+      <name>$PROJ_DIR$\..\..\Downloads\keypadlast\KeypadLast\Libraries\STM32F4xx_StdPeriph_Driver\src\tm_stm32f4_keypad.c</name>
+    </file>
   </group>
   <group>
     <name>STM32F4Discovery</name>
@@ -1941,6 +1945,9 @@
     <name>STM32Fxx_StdPeriph_Driver</name>
     <file>
       <name>E:\STM\STM32F4-Discovery_FW_V1.1.0\Libraries\STM32F4xx_StdPeriph_Driver\src\misc.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\MPU6050.c</name>
     </file>
     <file>
       <name>E:\STM\STM32F4-Discovery_FW_V1.1.0\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.c</name>
@@ -1957,9 +1964,21 @@
     <file>
       <name>E:\STM\STM32F4-Discovery_FW_V1.1.0\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.c</name>
     </file>
+    <file>
+      <name>E:\STM\STM32F4-Discovery_FW_V1.1.0\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\tm_stm32f4_delay.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\tm_stm32f4_disco.c</name>
+    </file>
   </group>
   <group>
     <name>User</name>
+    <file>
+      <name>E:\PID STM\00-STM32F4xx_STANDARD_PERIPHERAL_DRIVERS\CMSIS\DSP_Lib\Source\ControllerFunctions\arm_pid_init_f32.c</name>
+    </file>
     <file>
       <name>$PROJ_DIR$\main.c</name>
     </file>

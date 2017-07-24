@@ -125,7 +125,7 @@ void PendSV_Handler(void)
   */
 __IO uint32_t timingDelay;
 
-void SysTick_Handler(void)
+/*void SysTick_Handler(void)
 {
   if (timingDelay!=0)
   {
@@ -133,7 +133,7 @@ void SysTick_Handler(void)
   }
   
   
-}
+}*/
 
 /******************************************************************************/
 /*                 STM32Fxxx Peripherals Interrupt Handlers                   */
